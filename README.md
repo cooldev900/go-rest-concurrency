@@ -1,3 +1,5 @@
+# add tests to Linkeding learning course
+This project is based on Linkedin learning course and I'd like to add tests for further level up.
 # Applied Concurrency in Go
 This is the repository for the LinkedIn Learning course Applied Concurrency in Go. The full course is available from [LinkedIn Learning][lil-course-url].
 
