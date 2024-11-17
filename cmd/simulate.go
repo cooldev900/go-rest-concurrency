@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/applied-concurrency-in-go/models"
+	"github.com/cooldev900/go-rest-concurrency/models"
 )
 
 const simulationCount int = 50

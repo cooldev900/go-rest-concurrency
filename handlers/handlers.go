@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/applied-concurrency-in-go/models"
-	"github.com/applied-concurrency-in-go/repo"
+	"github.com/cooldev900/go-rest-concurrency/models"
+	"github.com/cooldev900/go-rest-concurrency/repo"
 	"github.com/gorilla/mux"
 )
 
@@ -18,6 +18,7 @@ type handler struct {
 	repo repo.Repo
 	once sync.Once
 }
+
 // Handler is the interface we expose to outside packages
 type Handler interface {
 	Index(w http.ResponseWriter, r *http.Request)
