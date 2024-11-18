@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/applied-concurrency-in-go/db"
-	"github.com/applied-concurrency-in-go/models"
-	"github.com/applied-concurrency-in-go/stats"
+	"github.com/cooldev900/go-rest-concurrency/db"
+	"github.com/cooldev900/go-rest-concurrency/models"
+	"github.com/cooldev900/go-rest-concurrency/stats"
 )
 
 // repo holds all the dependencies required for repo operations
