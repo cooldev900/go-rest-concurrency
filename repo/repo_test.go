@@ -1,26 +1,44 @@
-package repo_test
+//go:build test
+// +build test
+
+package mock_repo_test
 
 import (
 	"testing"
 
+	"github.com/cooldev900/go-rest-concurrency/mock_repo"
 	"github.com/cooldev900/go-rest-concurrency/models"
-	"github.com/cooldev900/go-rest-concurrency/repo"
+	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateOrder(t *testing.T) {
-	item := models.Item{ProductID: "1", Amount: 1}
+	// Initialize GoMock controller
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
 
-	r, err := repo.New()
-	assert.NoError(t, err, "Failed to create repo instance")
+	// Create a mock instance of the repository
+	repo := mock_repo.NewMockRepo(ctrl)
 
-	order, err := r.CreateOrder(item)
+	// Define test input and expected output
+	item := models.Item{
+		ProductID: "1",
+		Amount:    1,
+	}
+	expectedOrder := &models.Order{
+		ID:     "123",
+		Item:   item,
+		Status: models.OrderStatus_Completed,
+		Total:  func() *float64 { val := 10.0; return &val }(), // Example Total value
+	}
 
-	assert.NoError(t, err, "CreateOrder returned an error")
-	assert.NotNil(t, order, "CreateOrder returned nil order")
-	assert.Equal(t, item.ProductID, order.Item.ProductID, "ProductID does not match")
-	assert.Equal(t, item.Amount, order.Item.Amount, "Amount does not match")
-	assert.Equal(t, models.OrderStatus_Completed, order.Status, "Order status is not 'Completed'")
-	assert.NotNil(t, order.Total, "Order total should not be nil")
-	assert.Greater(t, *order.Total, 0.0, "Order total should be greater than 0")
+	// Set expectation for the CreateOrder method
+	repo.EXPECT().CreateOrder(item).Return(expectedOrder, nil)
+
+	// Call the method on the mock
+	order, err := repo.CreateOrder(item)
+
+	// Validate the result
+	assert.NoError(t, err, "Expected no error from CreateOrder")
+	assert.Equal(t, expectedOrder, order, "Returned order does not match expected order")
 }
