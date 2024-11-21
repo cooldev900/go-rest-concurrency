@@ -1,9 +1,8 @@
-package repo_test
+package repo
 
 import (
 	"testing"
 
-	"github.com/cooldev900/go-rest-concurrency/mock_repo"
 	"github.com/cooldev900/go-rest-concurrency/models"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
@@ -15,7 +14,7 @@ func TestCreateOrder(t *testing.T) {
 	defer ctrl.Finish()
 
 	// Create a mock instance of the repository
-	repo := mock_repo.NewMockRepo(ctrl)
+	repo := NewMockRepo(ctrl)
 
 	// Define test input and expected output
 	item := models.Item{
