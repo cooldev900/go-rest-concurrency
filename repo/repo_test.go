@@ -1,7 +1,4 @@
-//go:build test
-// +build test
-
-package mock_repo_test
+package repo_test
 
 import (
 	"testing"
